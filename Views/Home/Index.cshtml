@@ -1,10 +1,106 @@
-﻿
+﻿@model BridgeClosure
 
 @{
     ViewData["Title"] = "Prochaine fermeture";
+    var today = DateTime.Now;
+    var closing = Model.ClosingDate;
+    var reopen = Model.ReopeningDate;
+
+
+
 }
 
 
-<div class="text-center">
 
-</div>
+<h1>Prochaine fermeture</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Informations détailées pour la fermeture du @Html.DisplayFor(ModelItem => Model.ClosingDate)</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @if (Model.BoatName == "MAINTENANCE")
+            {
+                <th scope="row">Evenement en cours</th>
+                <td>Une maintenance aura lieu</td>
+            }
+            else
+            {
+                <th scope="row">Nom</th>
+                <td>@Html.DisplayFor(ModelItem => Model.BoatName)</td>
+            }
+
+
+        </tr>
+        <tr>
+            <th scope="row">Type de fermeture</th>
+            <td>@Html.DisplayFor(ModelItem => Model.ClosingType)</td>
+            
+        </tr>
+        <tr>
+            <th scope="row">Prochaine fermeture</th>
+            <td colspan="2">@Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+            
+        </tr>
+        <tr>
+            <th scope="row">Réouverture</th>
+            <td colspan="2"> @Model.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+            
+        </tr>
+        <tr>
+            <th scope="row">Durée</th>
+            <td colspan="2">@Model.ClosingDate.Subtract(Model.ReopeningDate).ToString(@"hh\:mm")</td>
+            
+        </tr>
+        <tr>
+            <th scope="row">Prochaine fermeture</th>
+            <td colspan="2" id="countdown"></td>
+            
+        </tr>
+        <tr>
+            <th scope="row">Impact traffic</th>
+            <td colspan="2">
+                @if (Model.ClosingDate.Hour >= 7 && Model.ClosingDate.Hour <= 9 || Model.ClosingDate.Hour >= 17 && Model.ClosingDate.Hour <= 19)
+                {
+                    <p>Elevé</p>
+                }
+                else
+                {
+                    <p>Faible</p>
+                }
+             </td>
+            
+        </tr>
+        <tr>
+            <th scope="row">Durée</th>
+            <td colspan="2">@Model.ClosingDate.Subtract(Model.ReopeningDate).ToString(@"hh\:mm")</td>
+            
+        </tr>
+    </tbody>
+</table>
+
+@section Scripts {
+    <script type="text/javascript">
+        var closingtime = "@Model.ClosingDate.ToString("yyyy-MM-ddTHH':'mm':'ss")";
+        closingtime = new Date(closingtime).getTime();
+        const timer = setInterval(function() {
+            const now = new Date().getTime()
+            console.log(now);
+            const distance = closingtime - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerHTML = `${days} jours ${hours} heures ${minutes} minutes et ${seconds} secondes`;
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "EXPIRÉ";
+              }
+        }, 1000);
+    </script>
+}
+
