@@ -33,7 +33,7 @@
                     <th scope="row">@closure.ClosingDate</th>
                     <td>@closure.BoatName</td>
                     <td>@closure.ReopeningDate</td>
-                    <td>@duration</td>
+                    <td>@duration.ToString(@"hh\:mm")</td>
                 </tr>
             }
         }
@@ -66,10 +66,11 @@
                     <th scope="row">@closure.ClosingDate</th>
                     <td>@closure.BoatName</td>
                     <td>@closure.ReopeningDate</td>
-                    <td>@duration</td>
+                    <td>@duration.ToString(@"hh\:mm")</td>
                 </tr>
             }
         }
 
     </tbody>
 </table>
+
