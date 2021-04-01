@@ -1,0 +1,19 @@
+﻿@model List<BridgeClosure>
+@{
+    ViewData["Title"] = "Toutes les fermetures";
+}
+
+<h1>AllClosures</h1>
+<ul>
+    @foreach (var closure in Model)
+    {
+        <li>@closure.BoatName</li>
+        <ul>
+            <li>@closure.ClosingType</li>
+            <li>@closure.ClosingDate</li>
+            <li>@closure.ReopeningDate</li>
+        </ul>
+        
+    }
+</ul>
+
