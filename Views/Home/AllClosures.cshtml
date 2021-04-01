@@ -1,19 +1,75 @@
 ﻿@model List<BridgeClosure>
 @{
     ViewData["Title"] = "Toutes les fermetures";
+    var today = DateTime.Now;
+    
+
 }
 
-<h1>AllClosures</h1>
-<ul>
-    @foreach (var closure in Model)
-    {
-        <li>@closure.BoatName</li>
-        <ul>
-            <li>@closure.ClosingType</li>
-            <li>@closure.ClosingDate</li>
-            <li>@closure.ReopeningDate</li>
-        </ul>
-        
-    }
-</ul>
+<h1>Toutes les fermetures</h1>
+<h2>Fermeture à venir</h2>
 
+    
+<table class="table caption-top">
+    <caption>Liste des fermetures</caption>
+    <thead>
+        <tr>
+            <th scope="col">Date de fermeture</th>
+            <th scope="col">Nom du bateau / évènement</th>
+            <th scope="col">Date de la réouverture</th>
+            <th scope="col">Durée de la fermeture</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var closure in Model)
+        {
+            TimeSpan duration = closure.ReopeningDate - closure.ClosingDate;
+            int datedifference = DateTime.Compare(closure.ClosingDate, today);
+            @if (datedifference >= 0)
+            {
+                <tr>
+                    <th scope="row">@closure.ClosingDate</th>
+                    <td>@closure.BoatName</td>
+                    <td>@closure.ReopeningDate</td>
+                    <td>@duration</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
+
+
+<h2>Fermetures passées</h2>
+<table class="table caption-top">
+    <caption>Liste des fermetures</caption>
+    <thead>
+        <tr>
+            <th scope="col">Date de fermeture</th>
+            <th scope="col">Nom du bateau / évènement</th>
+            <th scope="col">Date de la réouverture</th>
+            <th scope="col">Durée de la fermeture</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var closure in Model)
+        {
+            TimeSpan duration = closure.ReopeningDate - closure.ClosingDate;
+            int datedifference = DateTime.Compare(closure.ClosingDate, today);
+            @if (datedifference < 0)
+            {
+                <tr>
+                    <th scope="row">@closure.ClosingDate</th>
+                    <td>@closure.BoatName</td>
+                    <td>@closure.ReopeningDate</td>
+                    <td>@duration</td>
+                </tr>
+            }
+        }
+
+    </tbody>
+</table>
