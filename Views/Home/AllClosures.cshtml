@@ -2,46 +2,30 @@
 @{
     ViewData["Title"] = "Toutes les fermetures";
     var today = DateTime.Now;
-    
+    var Outdated = new List<BridgeClosure>();
+    var ValidDates = new List<BridgeClosure>();
+    var InstanceID = 0;
+
 
 }
 
 <h1>Toutes les fermetures</h1>
-<h2>Fermeture à venir</h2>
 
-    
-<table class="table caption-top">
-    <caption>Liste des fermetures</caption>
-    <thead>
-        <tr>
-            <th scope="col">Date de fermeture</th>
-            <th scope="col">Nom du bateau / évènement</th>
-            <th scope="col">Date de la réouverture</th>
-            <th scope="col">Durée de la fermeture</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        
-        @foreach (var closure in Model)
+@{
+    foreach (var selectedClosure in Model)
+    {
+        if (selectedClosure.ClosingDate > today)
         {
-            TimeSpan duration = closure.ReopeningDate - closure.ClosingDate;
-            int datedifference = DateTime.Compare(closure.ClosingDate, today);
-            @if (datedifference >= 0)
-            {
-                <tr>
-                    <th scope="row">@closure.ClosingDate</th>
-                    <td>@closure.BoatName</td>
-                    <td>@closure.ReopeningDate</td>
-                    <td>@duration.ToString(@"hh\:mm")</td>
-                </tr>
-            }
+            ValidDates.Add(selectedClosure);
         }
+        else
+        {
+            Outdated.Add(selectedClosure);
 
-    </tbody>
-</table>
-
-
+        }
+    }
+}
 <h2>Fermetures passées</h2>
 <table class="table caption-top">
     <caption>Liste des fermetures</caption>
@@ -56,21 +40,66 @@
     </thead>
     <tbody>
 
-        @foreach (var closure in Model)
+        @foreach (var closureInvalid in Outdated)
         {
-            TimeSpan duration = closure.ReopeningDate - closure.ClosingDate;
-            int datedifference = DateTime.Compare(closure.ClosingDate, today);
+            TimeSpan duration = closureInvalid.ReopeningDate - closureInvalid.ClosingDate;
+            int datedifference = DateTime.Compare(closureInvalid.ClosingDate, today);
+
             @if (datedifference < 0)
             {
                 <tr>
-                    <th scope="row">@closure.ClosingDate</th>
-                    <td>@closure.BoatName</td>
-                    <td>@closure.ReopeningDate</td>
+                    <th scope="row">@closureInvalid.ClosingDate</th>
+                    <td>@closureInvalid.BoatName</td>
+                    <td>@closureInvalid.ReopeningDate</td>
                     <td>@duration.ToString(@"hh\:mm")</td>
                 </tr>
+                InstanceID++;
             }
         }
 
     </tbody>
 </table>
+<h2>Fermeture à venir</h2>
+<table class="table caption-top">
+    <caption>Liste des fermetures</caption>
+    <thead>
+        <tr>
+            <th scope="col">Date de fermeture</th>
+            <th scope="col">Nom du bateau / évènement</th>
+            <th scope="col">Date de la réouverture</th>
+            <th scope="col">Durée de la fermeture</th>
+            <th scope="col">Détails</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var closureValid in ValidDates)
+        {
+            TimeSpan duration = closureValid.ReopeningDate - closureValid.ClosingDate;
+            int datedifference = DateTime.Compare(closureValid.ClosingDate, today);
+
+            @if (datedifference >= 0)
+            {
+
+
+                <tr>
+                    <th scope="row">@closureValid.ClosingDate</th>
+                    <td>@closureValid.BoatName</td>
+                    <td>@closureValid.ReopeningDate</td>
+                    <td>@duration.ToString(@"hh\:mm")</td>
+                    <td><a asp-area="" asp-controller="Home" asp-action="Details" asp-route-InstanceID="@InstanceID">Détails</a></td>
+                </tr>
+                InstanceID++;
+            }
+        }
+
+
+    </tbody>
+</table>
+
+
+
 
