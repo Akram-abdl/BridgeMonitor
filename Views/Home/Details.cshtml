@@ -1,7 +1,7 @@
 ﻿@model BridgeClosure
 
 @{
-    ViewData["Title"] = "Prochaine fermeture";
+    ViewData["Title"] = "Details";
     var today = DateTime.Now;
     var closing = Model.ClosingDate;
     var reopen = Model.ReopeningDate;
@@ -9,10 +9,6 @@
 
 
 }
-
-
-
-<h1>Prochaine fermeture</h1>
 
 <table class="table">
     <thead>
@@ -98,5 +94,3 @@
         }, 1000);
     </script>
 }
-
-
