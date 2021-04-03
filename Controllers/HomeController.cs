@@ -37,6 +37,15 @@ namespace BridgeMonitor.Controllers
             return View(closures);
         }
 
+
+        public IActionResult Details(int InstanceID)
+        {
+            var closures = GetAllBridgesClosureFromApi();
+            
+            return View(closures[InstanceID]);
+
+        }
+
         public IActionResult Privacy()
         {
             return View();
