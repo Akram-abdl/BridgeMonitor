@@ -13,11 +13,11 @@
 
     if (Model.ClosingDate < today)
     {
-        <h1>Fermeture passée du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</h1>
+        <h1>Fermeture passée du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</h1>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Informations détaillées pour la fermeture déjà passée du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</th>
+                    <th scope="col">Informations détaillées pour la fermeture déjà passée du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</th>
 
                 </tr>
             </thead>
@@ -43,12 +43,13 @@
                 </tr>
                 <tr>
                     <th scope="row">Date de fermeture</th>
-                    <td colspan="2">@Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+                    <td colspan="2">@Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</td>
+                    
 
                 </tr>
                 <tr>
                     <th scope="row">Date de Réouverture</th>
-                    <td colspan="2"> @Model.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+                    <td colspan="2"> @Model.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</td>
 
                 </tr>
                 <tr>
@@ -76,11 +77,11 @@
     }
     else
     {
-        <h1>Fermeture à venir du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</h1>
+        <h1>Fermeture à venir du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</h1>
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Informations détaillées pour la fermeture du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</th>
+                    <th scope="col">Informations détaillées pour la fermeture du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</th>
 
                 </tr>
             </thead>
@@ -106,12 +107,12 @@
                 </tr>
                 <tr>
                     <th scope="row">Prochaine fermeture</th>
-                    <td colspan="2">@Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+                    <td colspan="2">@Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</td>
 
                 </tr>
                 <tr>
                     <th scope="row">Réouverture</th>
-                    <td colspan="2"> @Model.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+                    <td colspan="2"> @Model.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</td>
 
                 </tr>
                 <tr>

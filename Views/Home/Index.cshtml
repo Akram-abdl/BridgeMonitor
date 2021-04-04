@@ -17,7 +17,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">Informations détailées pour la fermeture du @Model.ClosingDate</th>
+            <th scope="col">Informations détailées pour la fermeture du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</th>
 
         </tr>
     </thead>
@@ -43,12 +43,12 @@
         </tr>
         <tr>
             <th scope="row">Prochaine fermeture</th>
-            <td colspan="2">@Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+            <td colspan="2">@Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</td>
 
         </tr>
         <tr>
             <th scope="row">Réouverture</th>
-            <td colspan="2"> @Model.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+            <td colspan="2"> @Model.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss", new System.Globalization.CultureInfo("fr-FR"))</td>
 
         </tr>
         <tr>
