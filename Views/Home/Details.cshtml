@@ -9,70 +9,141 @@
 
 
 }
+@{
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">Informations détailées pour la fermeture du @Model.ClosingDate</th>
+    if (Model.ClosingDate < today)
+    {
+        <h1>Fermeture passée du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Informations détaillées pour la fermeture déjà passée du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            @if (Model.BoatName == "MAINTENANCE")
-            {
-                <th scope="row">Evenement en cours</th>
-                <td>Une maintenance aura lieu</td>
-            }
-            else
-            {
-                <th scope="row">Nom</th>
-                <td>@Model.BoatName</td>
-            }
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @if (Model.BoatName == "MAINTENANCE")
+                    {
+                        <th scope="row">Evenement causé</th>
+                        <td>Une maintenance avait eu lieu</td>
+                    }
+                    else
+                    {
+                        <th scope="row">Nom</th>
+                        <td>@Model.BoatName</td>
+                    }
 
 
-        </tr>
-        <tr>
-            <th scope="row">Type de fermeture</th>
-            <td>@Model.ClosingType</td>
+                </tr>
+                <tr>
+                    <th scope="row">Type de fermeture</th>
+                    <td>@Model.ClosingType</td>
 
-        </tr>
-        <tr>
-            <th scope="row">Prochaine fermeture</th>
-            <td colspan="2">@Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+                </tr>
+                <tr>
+                    <th scope="row">Date de fermeture</th>
+                    <td colspan="2">@Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
 
-        </tr>
-        <tr>
-            <th scope="row">Réouverture</th>
-            <td colspan="2"> @Model.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+                </tr>
+                <tr>
+                    <th scope="row">Date de Réouverture</th>
+                    <td colspan="2"> @Model.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
 
-        </tr>
-        <tr>
-            <th scope="row">Durée</th>
-            <td colspan="2">@Model.ClosingDate.Subtract(Model.ReopeningDate).ToString(@"hh\:mm")</td>
+                </tr>
+                <tr>
+                    <th scope="row">Durée</th>
+                    <td colspan="2">@Model.ClosingDate.Subtract(Model.ReopeningDate).ToString(@"hh\:mm")</td>
 
-        </tr>
-        <tr>
-            <th scope="row">Prochaine fermeture Countdown</th>
-            <td colspan="2" id="countdown"></td>
+                </tr>
 
-        </tr>
-        <tr>
-            <th scope="row">Impact traffic</th>
-            <td colspan="2">
-                @if (Model.ClosingDate.Hour >= 7 && Model.ClosingDate.Hour <= 9 || Model.ClosingDate.Hour >= 17 && Model.ClosingDate.Hour <= 19)
-                {
-                    <p>Elevé</p>
-                }
-                else
-                {
-                    <p>Faible</p>
-                }
-            </td>
+                <tr>
+                    <th scope="row">Impact trafic routier</th>
+                    <td colspan="2">
+                        @if (Model.ClosingDate.Hour >= 7 && Model.ClosingDate.Hour <= 9 || Model.ClosingDate.Hour >= 17 && Model.ClosingDate.Hour <= 19)
+                        {
+                            <p>Elevé</p>
+                        }
+                        else
+                        {
+                            <p>Faible</p>
+                        }
+                    </td>
 
-        </tr>
-    </tbody>
-</table>
+                </tr>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h1>Fermeture à venir du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Informations détaillées pour la fermeture du @Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @if (Model.BoatName == "MAINTENANCE")
+                    {
+                        <th scope="row">Evenement en cours</th>
+                        <td>Une maintenance aura lieu</td>
+                    }
+                    else
+                    {
+                        <th scope="row">Nom</th>
+                        <td>@Model.BoatName</td>
+                    }
+
+
+                </tr>
+                <tr>
+                    <th scope="row">Type de fermeture</th>
+                    <td>@Model.ClosingType</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Prochaine fermeture</th>
+                    <td colspan="2">@Model.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Réouverture</th>
+                    <td colspan="2"> @Model.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Durée</th>
+                    <td colspan="2">@Model.ClosingDate.Subtract(Model.ReopeningDate).ToString(@"hh\:mm")</td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Prochaine fermeture Countdown</th>
+                    <td colspan="2" id="countdown"></td>
+
+                </tr>
+                <tr>
+                    <th scope="row">Impact trafic routier</th>
+                    <td colspan="2">
+                        @if (Model.ClosingDate.Hour >= 7 && Model.ClosingDate.Hour <= 9 || Model.ClosingDate.Hour >= 17 && Model.ClosingDate.Hour <= 19)
+                        {
+                            <p>Elevé</p>
+                        }
+                        else
+                        {
+                            <p>Faible</p>
+                        }
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    }
+}
+
 
 @section Scripts {
     <script type="text/javascript">

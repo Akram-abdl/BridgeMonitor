@@ -35,6 +35,7 @@
             <th scope="col">Nom du bateau / évènement</th>
             <th scope="col">Date de la réouverture</th>
             <th scope="col">Durée de la fermeture</th>
+            <th scope="col">Détails</th>
 
         </tr>
     </thead>
@@ -48,10 +49,11 @@
             @if (datedifference < 0)
             {
                 <tr>
-                    <th scope="row">@closureInvalid.ClosingDate</th>
+                    <th scope="row">@closureInvalid.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</th>
                     <td>@closureInvalid.BoatName</td>
-                    <td>@closureInvalid.ReopeningDate</td>
+                    <td>@closureInvalid.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
                     <td>@duration.ToString(@"hh\:mm")</td>
+                    <td><a asp-area="" asp-controller="Home" asp-action="Details" asp-route-InstanceID="@InstanceID">Détails</a></td>
                 </tr>
                 InstanceID++;
             }
@@ -86,9 +88,9 @@
 
 
                 <tr>
-                    <th scope="row">@closureValid.ClosingDate</th>
+                    <th scope="row">@closureValid.ClosingDate.ToString("dddd dd MMMM à HH:mm:ss")</th>
                     <td>@closureValid.BoatName</td>
-                    <td>@closureValid.ReopeningDate</td>
+                    <td>@closureValid.ReopeningDate.ToString("dddd dd MMMM à HH:mm:ss")</td>
                     <td>@duration.ToString(@"hh\:mm")</td>
                     <td><a asp-area="" asp-controller="Home" asp-action="Details" asp-route-InstanceID="@InstanceID">Détails</a></td>
                 </tr>
